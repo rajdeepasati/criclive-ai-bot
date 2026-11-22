@@ -12,58 +12,46 @@ FEEDS = [
     "https://bbci.co.uk"
 ]
 
-def get_latest_cricket_news():
-    headlines = []
-    for url in FEEDS:
-        feed = feedparser.parse(url)
-        for entry in feed.entries[:3]:
-            headlines.append(f"- {entry.title}: {entry.get('summary', '')[:220]}")
-    return "\n".join(headlines) if headlines else "Latest International Cricket Updates"
+def get_news():
+    items = []
+    for u in FEEDS:
+        f = feedparser.parse(u)
+        for e in f.entries[:3]:
+            items.append(f"- {e.title}: {e.get('summary', '')[:200]}")
+    return "\n".join(items) if items else "Latest Cricket Updates"
 
-def generate_ai_article(news_context):
-    prompt = f"""
-    You are an expert cricket analyst and SEO sports writer. Analyze these real-time cricket updates:
-    {news_context}
-
-    Select the biggest trending story and write a 100% original, engaging, copyright-free cricket article (500-650 words) in clean HTML format (use <h2>, <p>, <ul>, <li>, <strong> tags only; do NOT include <html>, <body>, or markdown backticks).
-    Structure:
-    1. First line MUST be 'TITLE: ' followed by a catchy SEO headline.
-    2. Detailed Match / News Analysis.
-    3. Key Player Stats & Pitch Impact.
-    4. Fantasy XI & Expert Match Prediction Insights.
-    """
-    url = f"https://googleapis.com{GEMINI_KEY}"
-    response = requests.post(url, json={"contents": [{"parts": [{"text": prompt}]}]}).json()
+def write_post(news):
+    prompt = f"Write a 500-word SEO cricket news & fantasy analysis article in clean HTML (<p>, <h2>, <ul>, <li> only) based on:\n{news}\nFirst line must start with TITLE: "
+    api_url = "https://googleapis.com"
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
+    res = requests.post(api_url, params={"key": GEMINI_KEY}, json=payload).json()
     
-    if "candidates" not in response:
-        raise Exception(f"Gemini API Error: {response}")
+    if "candidates" not in res:
+        raise Exception(f"API Error: {res}")
         
-    text = response["candidates"][0]["content"]["parts"][0]["text"]
-    text = text.replace("```html", "").replace("```", "").strip()
-    
-    lines = text.split("\n")
-    title = "Latest Cricket Update & AI Match Analysis"
-    body_lines = []
-    for line in lines:
-        if line.startswith("TITLE:"):
-            title = line.replace("TITLE:", "").strip()
+    raw = res["candidates"][0]["content"]["parts"][0]["text"]
+    raw = raw.replace("```html", "").replace("```", "").strip()
+    lines = raw.split("\n")
+    title = "Cricket News & AI Analysis"
+    body = []
+    for l in lines:
+        if l.startswith("TITLE:"):
+            title = l.replace("TITLE:", "").strip()
         else:
-            body_lines.append(line)
-    return title, "\n".join(body_lines)
+            body.append(l)
+    return title, "\n".join(body)
 
-def publish_to_blogger(title, html_body):
+def send_post(title, html):
     msg = MIMEMultipart("alternative")
     msg["Subject"] = title
     msg["From"] = GMAIL_USER
     msg["To"] = BLOGGER_EMAIL
-    msg.attach(MIMEText(html_body, "html"))
-
-    with smtplib.SMTP_SSL("://gmail.com", 465) as server:
-        server.login(GMAIL_USER, GMAIL_PASS)
-        server.sendmail(GMAIL_USER, BLOGGER_EMAIL, msg.as_string())
-    print("Successfully Auto-Published:", title)
+    msg.attach(MIMEText(html, "html"))
+    with smtplib.SMTP_SSL("://gmail.com", 465) as s:
+        s.login(GMAIL_USER, GMAIL_PASS)
+        s.sendmail(GMAIL_USER, BLOGGER_EMAIL, msg.as_string())
+    print("Done:", title)
 
 if __name__ == "__main__":
-    news = get_latest_cricket_news()
-    title, article = generate_ai_article(news)
-    publish_to_blogger(title, article)
+    t, b = write_post(get_news())
+    send_post(t, b)
