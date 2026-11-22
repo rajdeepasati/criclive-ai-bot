@@ -18,11 +18,11 @@ def get_latest_cricket_news():
         feed = feedparser.parse(url)
         for entry in feed.entries[:3]:
             headlines.append(f"- {entry.title}: {entry.get('summary', '')[:220]}")
-    return "\n".join(headlines) if headlines else "Latest International Cricket Matches & Series Updates"
+    return "\n".join(headlines) if headlines else "Latest International Cricket Updates"
 
 def generate_ai_article(news_context):
     prompt = f"""
-    You are an expert cricket analyst and SEO sports writer. Analyze these real-time cricket news updates:
+    You are an expert cricket analyst and SEO sports writer. Analyze these real-time cricket updates:
     {news_context}
 
     Select the biggest trending story and write a 100% original, engaging, copyright-free cricket article (500-650 words) in clean HTML format (use <h2>, <p>, <ul>, <li>, <strong> tags only; do NOT include <html>, <body>, or markdown backticks).
@@ -67,4 +67,3 @@ if __name__ == "__main__":
     news = get_latest_cricket_news()
     title, article = generate_ai_article(news)
     publish_to_blogger(title, article)
-    
