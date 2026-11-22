@@ -19,25 +19,29 @@ def get_news():
         f = feedparser.parse(u)
         for e in f.entries[:3]:
             items.append(f"- {e.title}: {e.get('summary', '')[:200]}")
-    return "\n".join(items) if items else "Latest Cricket Updates"
+    return "\n".join(items) if items else "Latest International Cricket Updates"
 
 def write_post(news):
     client = genai.Client(api_key=GEMINI_KEY)
     prompt = f"Write a 500-word SEO cricket news & fantasy analysis article in clean HTML (<p>, <h2>, <ul>, <li> only) based on:\n{news}\nFirst line must start with TITLE: "
     
-    models = ["gemini-3.8-flash", "gemini-3.8-flash-lite", "gemini-3.8-pro"]
+    models = ["gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-3.5-flash"]
     raw = ""
     for m in models:
         for attempt in range(3):
             try:
                 res = client.models.generate_content(model=m, contents=prompt)
-                raw = res.text
-                break
+                if res.text:
+                    raw = res.text
+                    break
             except Exception as e:
                 print(f"Retrying {m}...", e)
                 time.sleep(5)
         if raw:
             break
+
+    if not raw:
+        raise Exception("All models busy, skipping empty post.")
 
     raw = raw.replace("```html", "").replace("```", "").strip()
     lines = raw.split("\n")
