@@ -47,7 +47,7 @@ def send_post(title, html):
     msg["From"] = GMAIL_USER
     msg["To"] = BLOGGER_EMAIL
     msg.attach(MIMEText(html, "html"))
-    with smtplib.SMTP_SSL("://gmail.com", 465) as s:
+    with smtplib.SMTP_SSL("smtp" + ".gmail.com", 465) as s:
         s.login(GMAIL_USER, GMAIL_PASS)
         s.sendmail(GMAIL_USER, BLOGGER_EMAIL, msg.as_string())
     print("Done:", title)
