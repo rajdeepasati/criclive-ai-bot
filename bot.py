@@ -26,7 +26,7 @@ def write_post(news):
     prompt = f"Write a 500-word SEO cricket news & fantasy analysis article in clean HTML (<p>, <h2>, <ul>, <li> only) based on:\n{news}\nFirst line must start with TITLE: "
     
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="model="gemini-3.8-flash",
         contents=prompt,
     )
     
