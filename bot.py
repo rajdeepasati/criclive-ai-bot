@@ -1,4 +1,4 @@
-import os, time, smtplib, feedparser
+import os, time, smtplib, feedparser, requests
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from google import genai
@@ -10,30 +10,46 @@ GMAIL_PASS = os.environ["GMAIL_PASS"].replace(" ", "").strip()
 
 FEEDS = [
     "https://espncricinfo.com",
-    "https://bbci.co.uk"
+    "https://bbci.co.uk",
+    "https://google.com"
 ]
+
+def get_recent_blog_titles():
+    try:
+        r = requests.get("https://blogspot.com", timeout=10).json()
+        entries = r.get("feed", {}).get("entry", [])
+        return [e["title"]["$t"] for e in entries]
+    except:
+        return []
 
 def get_news():
     items = []
     for u in FEEDS:
-        f = feedparser.parse(u)
-        for e in f.entries[:3]:
-            items.append(f"- {e.title}: {e.get('summary', '')[:200]}")
-    return "\n".join(items) if items else "Latest International Cricket Updates"
+        try:
+            f = feedparser.parse(u)
+            for e in f.entries[:4]:
+                items.append(f"- {e.title}")
+        except:
+            pass
+    return "\n".join(items[:10]) if items else "Latest International & IPL Cricket Updates"
 
-def write_post(news):
+def write_post(news, past_titles):
     client = genai.Client(api_key=GEMINI_KEY)
+    avoid_text = "\n".join([f"- {t}" for t in past_titles]) if past_titles else "None"
     prompt = f"""
-    You are a top Indian cricket analyst & sports blogger. Analyze these latest cricket updates:
+    You are an expert Indian cricket analyst. Based on these real-time cricket headlines:
     {news}
 
-    Write a 500-word SEO cricket news & fantasy analysis article in natural, engaging HINGLISH (Hindi written in English script, like Indian sports websites use).
-    Use clean HTML tags (<p>, <h2>, <ul>, <li>, <strong> only; NO <html>, <body>, or markdown backticks).
-    First line MUST start with 'TITLE: ' followed by a catchy Hinglish SEO headline.
+    IMPORTANT: Do NOT write about topics already covered in these recent posts:
+    {avoid_text}
+
+    Pick a FRESH trending match or cricket update and write a 500-word SEO article in natural HINGLISH.
+    Use clean HTML tags (<p>, <h2>, <ul>, <li>, <strong> only; NO <html>, <body>, or backticks).
+    First line MUST start with 'TITLE: ' followed by a unique, catchy Hinglish headline.
     Include:
-    1. Breaking Match / News Update in Hinglish
-    2. Pitch Report & Key Player Stats
-    3. Today's Fantasy 11 & Captain/Vice-Captain Suggestion
+    1. Fresh Match / News Update in Hinglish
+    2. Stadium Pitch Report & Key Player Stats
+    3. Best Fantasy 11 (WK, BAT, ALL, BOWL) & Captain/Vice-Captain Picks
     """
     
     models = ["gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-3.5-flash"]
@@ -46,17 +62,16 @@ def write_post(news):
                     raw = res.text
                     break
             except Exception as e:
-                print(f"Retrying {m}...", e)
                 time.sleep(5)
         if raw:
             break
 
     if not raw:
-        raise Exception("All models busy, skipping empty post.")
+        raise Exception("Models busy, skipping empty post.")
 
     raw = raw.replace("```html", "").replace("```", "").strip()
     lines = raw.split("\n")
-    title = "Cricket News & AI Match Analysis"
+    title = "Cricket News & Fantasy 11 Analysis"
     body = []
     for l in lines:
         if l.startswith("TITLE:"):
@@ -78,5 +93,6 @@ def send_post(title, html):
     print("Published:", title)
 
 if __name__ == "__main__":
-    t, b = write_post(get_news())
+    past = get_recent_blog_titles()
+    t, b = write_post(get_news(), past)
     send_post(t, b)
