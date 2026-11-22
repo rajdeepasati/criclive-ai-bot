@@ -23,7 +23,18 @@ def get_news():
 
 def write_post(news):
     client = genai.Client(api_key=GEMINI_KEY)
-    prompt = f"Write a 500-word SEO cricket news & fantasy analysis article in clean HTML (<p>, <h2>, <ul>, <li> only) based on:\n{news}\nFirst line must start with TITLE: "
+    prompt = f"""
+    You are a top Indian cricket analyst & sports blogger. Analyze these latest cricket updates:
+    {news}
+
+    Write a 500-word SEO cricket news & fantasy analysis article in natural, engaging HINGLISH (Hindi written in English script, like Indian sports websites use).
+    Use clean HTML tags (<p>, <h2>, <ul>, <li>, <strong> only; NO <html>, <body>, or markdown backticks).
+    First line MUST start with 'TITLE: ' followed by a catchy Hinglish SEO headline.
+    Include:
+    1. Breaking Match / News Update in Hinglish
+    2. Pitch Report & Key Player Stats
+    3. Today's Fantasy 11 & Captain/Vice-Captain Suggestion
+    """
     
     models = ["gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-3.5-flash"]
     raw = ""
@@ -45,7 +56,7 @@ def write_post(news):
 
     raw = raw.replace("```html", "").replace("```", "").strip()
     lines = raw.split("\n")
-    title = "Cricket News & AI Analysis"
+    title = "Cricket News & AI Match Analysis"
     body = []
     for l in lines:
         if l.startswith("TITLE:"):
