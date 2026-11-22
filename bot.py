@@ -1,6 +1,7 @@
-import os, smtplib, feedparser, requests
+import os, smtplib, feedparser
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from google import genai
 
 GEMINI_KEY = os.environ["GEMINI_API_KEY"].strip()
 BLOGGER_EMAIL = os.environ["BLOGGER_EMAIL"].strip()
@@ -21,16 +22,15 @@ def get_news():
     return "\n".join(items) if items else "Latest Cricket Updates"
 
 def write_post(news):
+    client = genai.Client(api_key=GEMINI_KEY)
     prompt = f"Write a 500-word SEO cricket news & fantasy analysis article in clean HTML (<p>, <h2>, <ul>, <li> only) based on:\n{news}\nFirst line must start with TITLE: "
-    api_url = "https://googleapis.com"
-    payload = {"contents": [{"parts": [{"text": prompt}]}]}
-    res = requests.post(api_url, params={"key": GEMINI_KEY}, json=payload).json()
     
-    if "candidates" not in res:
-        raise Exception(f"API Error: {res}")
-        
-    raw = res["candidates"][0]["content"]["parts"][0]["text"]
-    raw = raw.replace("```html", "").replace("```", "").strip()
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+    )
+    
+    raw = response.text.replace("```html", "").replace("```", "").strip()
     lines = raw.split("\n")
     title = "Cricket News & AI Analysis"
     body = []
