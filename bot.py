@@ -9,15 +9,15 @@ GMAIL_USER = os.environ["GMAIL_USER"].strip()
 GMAIL_PASS = os.environ["GMAIL_PASS"].replace(" ", "").strip()
 
 FEEDS = [
-    "https://www." + "://espncricinfo.com",
-    "https://feeds." + "bbci.co.uk/sport/cricket/rss.xml",
-    "https://news." + "://google.com"
+    "https://" + ".".join(["www", "espncricinfo", "com"]) + "/rss/content/story/feeds/0.xml",
+    "https://" + ".".join(["feeds", "bbci", "co", "uk"]) + "/sport/cricket/rss.xml",
+    "https://" + ".".join(["news", "google", "com"]) + "/rss/search?q=cricket+match+prediction+OR+IPL+OR+Team+India&hl=en-IN&gl=IN&ceid=IN:en"
 ]
 
 def get_recent_blog_titles():
     try:
-        blog_url = "https://criclivepulse" + "://"
-        r = requests.get(blog_url, timeout=10).json()
+        blog_url = "https://" + ".".join(["criclivepulse", "blogspot", "com"]) + "/feeds/posts/default?alt=json&max-results=5"
+        r = requests.get(blog_url, timeout=6).json()
         entries = r.get("feed", {}).get("entry", [])
         return [e["title"]["$t"] for e in entries]
     except:
@@ -27,7 +27,8 @@ def get_news():
     items = []
     for u in FEEDS:
         try:
-            f = feedparser.parse(u)
+            resp = requests.get(u, timeout=6)
+            f = feedparser.parse(resp.content)
             for e in f.entries[:4]:
                 items.append(f"- {e.title}")
         except:
