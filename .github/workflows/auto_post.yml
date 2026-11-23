@@ -1,20 +1,37 @@
 name: Cricket AI Bot
+
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *' 
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
-  bot:
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install feedparser google-genai
-      - env:
+      - run: pip install google-genai feedparser requests
+      - name: Run AI Blog Bot
+        env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOGGER_EMAIL: ${{ secrets.BLOGGER_EMAIL }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
         run: python bot.py
+      - name: Update Rankings, Records & Schedule
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python update_data.py
+          git config user.name "CricLive Bot"
+          git config user.email "bot@criclivepulse.com"
+          git add cricdata.json
+          git commit -m "Auto-update cricdata" || exit 0
+          git push
