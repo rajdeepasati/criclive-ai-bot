@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -19,6 +19,7 @@ jobs:
           python-version: '3.11'
       - run: pip install google-genai feedparser requests
       - name: Run AI Blog Bot
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           BLOGGER_EMAIL: ${{ secrets.BLOGGER_EMAIL }}
