@@ -1,4 +1,4 @@
-import os, time, smtplib, feedparser, requests
+import os, time, random, smtplib, feedparser, requests
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from google import genai
@@ -7,6 +7,15 @@ GEMINI_KEY = os.environ["GEMINI_API_KEY"].strip()
 BLOGGER_EMAIL = os.environ["BLOGGER_EMAIL"].strip()
 GMAIL_USER = os.environ["GMAIL_USER"].strip()
 GMAIL_PASS = os.environ["GMAIL_PASS"].replace(" ", "").strip()
+TG_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+
+CRICKET_IMAGES = [
+    "https://unsplash.com",
+    "https://unsplash.com",
+    "https://unsplash.com",
+    "https://unsplash.com"
+]
 
 FEEDS = [
     "https://" + ".".join(["www", "espncricinfo", "com"]) + "/rss/content/story/feeds/0.xml",
@@ -75,16 +84,22 @@ def write_post(news, past_titles):
     raw = raw.replace("```html", "").replace("```", "").strip()
     lines = raw.split("\n")
     title = "Cricket News & Fantasy 11 Analysis"
+    schedule_info = ""
     body = []
     for l in lines:
         if l.startswith("TITLE:"):
             title = l.replace("TITLE:", "").strip()
         elif l.startswith("MATCH_INFO:"):
-            info = l.replace("MATCH_INFO:", "").strip()
-            body.insert(0, f"<p><strong>⏰ Match Schedule:</strong> {info}</p>")
+            schedule_info = l.replace("MATCH_INFO:", "").strip()
         else:
             body.append(l)
-    return title, "\n".join(body)
+
+    img_url = random.choice(CRICKET_IMAGES)
+    header_html = f'<div style="margin-bottom:14px"><img src="{img_url}" alt="{title}" style="width:100%;border-radius:10px;max-height:360px;object-fit:cover"/></div>'
+    if schedule_info:
+        header_html += f'<p style="background:#ecfdf5;padding:10px;border-left:4px solid #009270;border-radius:6px"><strong>⏰ Match Schedule:</strong> {schedule_info}</p>'
+
+    return title, header_html + "\n" + "\n".join(body), schedule_info
 
 def send_post(title, html):
     msg = MIMEMultipart("alternative")
@@ -96,9 +111,22 @@ def send_post(title, html):
     with smtplib.SMTP_SSL(host, 465) as s:
         s.login(GMAIL_USER, GMAIL_PASS)
         s.sendmail(GMAIL_USER, BLOGGER_EMAIL, msg.as_string())
-    print("Published:", title)
+    print("Published to Blogger:", title)
+
+def send_telegram(title, schedule_info):
+    if not TG_TOKEN or not TG_CHAT:
+        return
+    try:
+        site_url = "https://" + ".".join(["criclivepulse", "blogspot", "com"])
+        text = f"🏏 *{title}*\n\n⏰ {schedule_info}\n\n📊 Pitch Report & Winning Fantasy 11 yahan dekhein 👇\n{site_url}"
+        tg_url = f"https://telegram.org{TG_TOKEN}/sendMessage"
+        requests.post(tg_url, json={"chat_id": TG_CHAT, "text": text, "parse_mode": "Markdown"}, timeout=8)
+        print("Shared to Telegram!")
+    except Exception as e:
+        print("Telegram skip:", e)
 
 if __name__ == "__main__":
     past = get_recent_blog_titles()
-    t, b = write_post(get_news(), past)
+    t, b, sched = write_post(get_news(), past)
     send_post(t, b)
+    send_telegram(t, sched)
