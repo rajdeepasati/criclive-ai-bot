@@ -1,35 +1,173 @@
 {
   "updated": "23 Nov 2026",
+  "series": [
+    {
+      "month": "NOVEMBER - JANUARY 2026",
+      "name": "The Ashes 2026-27",
+      "dates": "Nov 26 - Jan 07"
+    },
+    {
+      "month": "NOVEMBER - DECEMBER 2026",
+      "name": "India tour of South Africa 2026",
+      "dates": "Nov 28 - Dec 19"
+    },
+    {
+      "month": "DECEMBER 2026 - JANUARY 2027",
+      "name": "Pakistan tour of Australia 2026-27",
+      "dates": "Dec 15 - Jan 18"
+    },
+    {
+      "month": "JANUARY - FEBRUARY 2027",
+      "name": "England tour of New Zealand 2027",
+      "dates": "Jan 22 - Feb 20"
+    },
+    {
+      "month": "FEBRUARY - MARCH 2027",
+      "name": "Border-Gavaskar Trophy 2027",
+      "dates": "Feb 10 - Mar 22"
+    },
+    {
+      "month": "APRIL - MAY 2027",
+      "name": "Indian Premier League 2027",
+      "dates": "Mar 26 - May 30"
+    }
+  ],
+  "wtc": [
+    {
+      "rank": 1,
+      "team": "Australia",
+      "m": 15,
+      "w": 10,
+      "l": 3,
+      "pct": "68.52%"
+    },
+    {
+      "rank": 2,
+      "team": "India",
+      "m": 16,
+      "w": 10,
+      "l": 4,
+      "pct": "64.58%"
+    },
+    {
+      "rank": 3,
+      "team": "South Africa",
+      "m": 10,
+      "w": 6,
+      "l": 3,
+      "pct": "63.33%"
+    },
+    {
+      "rank": 4,
+      "team": "New Zealand",
+      "m": 11,
+      "w": 6,
+      "l": 4,
+      "pct": "57.58%"
+    },
+    {
+      "rank": 5,
+      "team": "Sri Lanka",
+      "m": 9,
+      "w": 5,
+      "l": 4,
+      "pct": "55.56%"
+    },
+    {
+      "rank": 6,
+      "team": "England",
+      "m": 17,
+      "w": 9,
+      "l": 7,
+      "pct": "47.06%"
+    }
+  ],
+  "players": [
+    {
+      "name": "Virat Kohli",
+      "team": "IND",
+      "role": "Batter",
+      "runs": "27,100+",
+      "avg": "53.2",
+      "sr": "93.4"
+    },
+    {
+      "name": "Rohit Sharma",
+      "team": "IND",
+      "role": "Batter",
+      "runs": "19,500+",
+      "avg": "48.8",
+      "sr": "92.2"
+    },
+    {
+      "name": "Jasprit Bumrah",
+      "team": "IND",
+      "role": "Bowler",
+      "runs": "435+ Wkts",
+      "avg": "20.1",
+      "sr": "4.5 Econ"
+    },
+    {
+      "name": "Joe Root",
+      "team": "ENG",
+      "role": "Batter",
+      "runs": "20,200+",
+      "avg": "50.6",
+      "sr": "86.7"
+    },
+    {
+      "name": "Steve Smith",
+      "team": "AUS",
+      "role": "Batter",
+      "runs": "16,800+",
+      "avg": "55.8",
+      "sr": "79.3"
+    },
+    {
+      "name": "Pat Cummins",
+      "team": "AUS",
+      "role": "Bowler",
+      "runs": "510+ Wkts",
+      "avg": "22.4",
+      "sr": "4.8 Econ"
+    }
+  ],
   "schedule": [
     {
       "series": "The Ashes 2026-27",
-      "match": "Australia vs England",
+      "match": "1st Test: Australia vs England",
       "date": "26 Nov 2026, 05:30 AM IST",
       "venue": "Perth Stadium, Perth"
     },
     {
       "series": "India tour of South Africa 2026",
-      "match": "South Africa vs India",
+      "match": "1st ODI: South Africa vs India",
       "date": "28 Nov 2026, 01:30 PM IST",
       "venue": "SuperSport Park, Centurion"
     },
     {
-      "series": "New Zealand tour of West Indies 2026",
-      "match": "West Indies vs New Zealand",
-      "date": "01 Dec 2026, 07:00 PM IST",
-      "venue": "Kensington Oval, Bridgetown"
-    },
-    {
       "series": "India tour of South Africa 2026",
-      "match": "South Africa vs India",
-      "date": "03 Dec 2026, 01:30 PM IST",
+      "match": "2nd ODI: South Africa vs India",
+      "date": "01 Dec 2026, 01:30 PM IST",
       "venue": "Wanderers Stadium, Johannesburg"
     },
     {
-      "series": "Pakistan tour of Sri Lanka 2026",
-      "match": "Sri Lanka vs Pakistan",
-      "date": "06 Dec 2026, 10:00 AM IST",
-      "venue": "R. Premadasa Stadium, Colombo"
+      "series": "The Ashes 2026-27",
+      "match": "2nd Test: Australia vs England",
+      "date": "04 Dec 2026, 09:30 AM IST",
+      "venue": "Gabba, Brisbane"
+    },
+    {
+      "series": "India tour of South Africa 2026",
+      "match": "1st Test: South Africa vs India",
+      "date": "10 Dec 2026, 01:30 PM IST",
+      "venue": "Newlands, Cape Town"
+    },
+    {
+      "series": "Pakistan tour of Australia 2026-27",
+      "match": "1st T20I: Australia vs Pakistan",
+      "date": "15 Dec 2026, 01:45 PM IST",
+      "venue": "SCG, Sydney"
     }
   ],
   "rankings": {
@@ -43,27 +181,33 @@
         },
         {
           "rank": 2,
-          "name": "Harry Brook",
-          "team": "ENG",
-          "pts": 878
+          "name": "Kane Williamson",
+          "team": "NZ",
+          "pts": 859
         },
         {
           "rank": 3,
-          "name": "Kane Williamson",
+          "name": "Daryl Mitchell",
           "team": "NZ",
-          "pts": 844
+          "pts": 768
         },
         {
           "rank": 4,
-          "name": "Yashasvi Jaiswal",
-          "team": "IND",
-          "pts": 830
+          "name": "Steve Smith",
+          "team": "AUS",
+          "pts": 757
         },
         {
           "rank": 5,
-          "name": "Steve Smith",
-          "team": "AUS",
-          "pts": 818
+          "name": "Yashasvi Jaiswal",
+          "team": "IND",
+          "pts": 751
+        },
+        {
+          "rank": 6,
+          "name": "Harry Brook",
+          "team": "ENG",
+          "pts": 748
         }
       ],
       "odi": [
@@ -77,25 +221,31 @@
           "rank": 2,
           "name": "Babar Azam",
           "team": "PAK",
-          "pts": 778
+          "pts": 763
         },
         {
           "rank": 3,
           "name": "Rohit Sharma",
           "team": "IND",
-          "pts": 765
+          "pts": 756
         },
         {
           "rank": 4,
           "name": "Virat Kohli",
           "team": "IND",
-          "pts": 752
+          "pts": 748
         },
         {
           "rank": 5,
           "name": "Daryl Mitchell",
           "team": "NZ",
-          "pts": 740
+          "pts": 715
+        },
+        {
+          "rank": 6,
+          "name": "Harry Tector",
+          "team": "IRE",
+          "pts": 709
         }
       ],
       "t20": [
@@ -109,7 +259,7 @@
           "rank": 2,
           "name": "Suryakumar Yadav",
           "team": "IND",
-          "pts": 837
+          "pts": 821
         },
         {
           "rank": 3,
@@ -128,6 +278,12 @@
           "name": "Babar Azam",
           "team": "PAK",
           "pts": 755
+        },
+        {
+          "rank": 6,
+          "name": "Mohammad Rizwan",
+          "team": "PAK",
+          "pts": 746
         }
       ]
     },
@@ -143,25 +299,31 @@
           "rank": 2,
           "name": "Nat Sciver-Brunt",
           "team": "ENG",
-          "pts": 762
+          "pts": 761
         },
         {
           "rank": 3,
           "name": "Smriti Mandhana",
           "team": "IND",
-          "pts": 754
+          "pts": 745
         },
         {
           "rank": 4,
-          "name": "Beth Mooney",
-          "team": "AUS",
-          "pts": 748
+          "name": "Chamari Athapaththu",
+          "team": "SL",
+          "pts": 728
         },
         {
           "rank": 5,
           "name": "Ellyse Perry",
           "team": "AUS",
-          "pts": 725
+          "pts": 702
+        },
+        {
+          "rank": 6,
+          "name": "Beth Mooney",
+          "team": "AUS",
+          "pts": 699
         }
       ],
       "t20": [
@@ -179,21 +341,27 @@
         },
         {
           "rank": 3,
-          "name": "Smriti Mandhana",
-          "team": "IND",
-          "pts": 741
+          "name": "Tahlia McGrath",
+          "team": "AUS",
+          "pts": 732
         },
         {
           "rank": 4,
           "name": "Laura Wolvaardt",
           "team": "SA",
-          "pts": 732
+          "pts": 720
         },
         {
           "rank": 5,
-          "name": "Tahlia McGrath",
-          "team": "AUS",
-          "pts": 720
+          "name": "Smriti Mandhana",
+          "team": "IND",
+          "pts": 714
+        },
+        {
+          "rank": 6,
+          "name": "Suzie Bates",
+          "team": "NZ",
+          "pts": 698
         }
       ]
     }
@@ -219,11 +387,6 @@
         "title": "Highest ODI Individual Score",
         "player": "Rohit Sharma (IND)",
         "stat": "264 Runs"
-      },
-      {
-        "title": "Highest Test Individual Score",
-        "player": "Brian Lara (WI)",
-        "stat": "400* Runs"
       }
     ],
     "bowling": [
@@ -241,11 +404,6 @@
         "title": "Most 5-Wicket Hauls",
         "player": "Muttiah Muralitharan (SL)",
         "stat": "67 Five-Fors"
-      },
-      {
-        "title": "Most Test Wickets",
-        "player": "Muttiah Muralitharan (SL)",
-        "stat": "800 Wickets"
       }
     ]
   }
