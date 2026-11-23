@@ -1,0 +1,252 @@
+{
+  "updated": "23 Nov 2026",
+  "schedule": [
+    {
+      "series": "The Ashes 2026-27",
+      "match": "Australia vs England",
+      "date": "26 Nov 2026, 05:30 AM IST",
+      "venue": "Perth Stadium, Perth"
+    },
+    {
+      "series": "India tour of South Africa 2026",
+      "match": "South Africa vs India",
+      "date": "28 Nov 2026, 01:30 PM IST",
+      "venue": "SuperSport Park, Centurion"
+    },
+    {
+      "series": "New Zealand tour of West Indies 2026",
+      "match": "West Indies vs New Zealand",
+      "date": "01 Dec 2026, 07:00 PM IST",
+      "venue": "Kensington Oval, Bridgetown"
+    },
+    {
+      "series": "India tour of South Africa 2026",
+      "match": "South Africa vs India",
+      "date": "03 Dec 2026, 01:30 PM IST",
+      "venue": "Wanderers Stadium, Johannesburg"
+    },
+    {
+      "series": "Pakistan tour of Sri Lanka 2026",
+      "match": "Sri Lanka vs Pakistan",
+      "date": "06 Dec 2026, 10:00 AM IST",
+      "venue": "R. Premadasa Stadium, Colombo"
+    }
+  ],
+  "rankings": {
+    "men": {
+      "test": [
+        {
+          "rank": 1,
+          "name": "Joe Root",
+          "team": "ENG",
+          "pts": 899
+        },
+        {
+          "rank": 2,
+          "name": "Harry Brook",
+          "team": "ENG",
+          "pts": 878
+        },
+        {
+          "rank": 3,
+          "name": "Kane Williamson",
+          "team": "NZ",
+          "pts": 844
+        },
+        {
+          "rank": 4,
+          "name": "Yashasvi Jaiswal",
+          "team": "IND",
+          "pts": 830
+        },
+        {
+          "rank": 5,
+          "name": "Steve Smith",
+          "team": "AUS",
+          "pts": 818
+        }
+      ],
+      "odi": [
+        {
+          "rank": 1,
+          "name": "Shubman Gill",
+          "team": "IND",
+          "pts": 784
+        },
+        {
+          "rank": 2,
+          "name": "Babar Azam",
+          "team": "PAK",
+          "pts": 778
+        },
+        {
+          "rank": 3,
+          "name": "Rohit Sharma",
+          "team": "IND",
+          "pts": 765
+        },
+        {
+          "rank": 4,
+          "name": "Virat Kohli",
+          "team": "IND",
+          "pts": 752
+        },
+        {
+          "rank": 5,
+          "name": "Daryl Mitchell",
+          "team": "NZ",
+          "pts": 740
+        }
+      ],
+      "t20": [
+        {
+          "rank": 1,
+          "name": "Travis Head",
+          "team": "AUS",
+          "pts": 855
+        },
+        {
+          "rank": 2,
+          "name": "Suryakumar Yadav",
+          "team": "IND",
+          "pts": 837
+        },
+        {
+          "rank": 3,
+          "name": "Phil Salt",
+          "team": "ENG",
+          "pts": 798
+        },
+        {
+          "rank": 4,
+          "name": "Yashasvi Jaiswal",
+          "team": "IND",
+          "pts": 757
+        },
+        {
+          "rank": 5,
+          "name": "Babar Azam",
+          "team": "PAK",
+          "pts": 755
+        }
+      ]
+    },
+    "women": {
+      "odi": [
+        {
+          "rank": 1,
+          "name": "Laura Wolvaardt",
+          "team": "SA",
+          "pts": 782
+        },
+        {
+          "rank": 2,
+          "name": "Nat Sciver-Brunt",
+          "team": "ENG",
+          "pts": 762
+        },
+        {
+          "rank": 3,
+          "name": "Smriti Mandhana",
+          "team": "IND",
+          "pts": 754
+        },
+        {
+          "rank": 4,
+          "name": "Beth Mooney",
+          "team": "AUS",
+          "pts": 748
+        },
+        {
+          "rank": 5,
+          "name": "Ellyse Perry",
+          "team": "AUS",
+          "pts": 725
+        }
+      ],
+      "t20": [
+        {
+          "rank": 1,
+          "name": "Beth Mooney",
+          "team": "AUS",
+          "pts": 765
+        },
+        {
+          "rank": 2,
+          "name": "Hayley Matthews",
+          "team": "WI",
+          "pts": 748
+        },
+        {
+          "rank": 3,
+          "name": "Smriti Mandhana",
+          "team": "IND",
+          "pts": 741
+        },
+        {
+          "rank": 4,
+          "name": "Laura Wolvaardt",
+          "team": "SA",
+          "pts": 732
+        },
+        {
+          "rank": 5,
+          "name": "Tahlia McGrath",
+          "team": "AUS",
+          "pts": 720
+        }
+      ]
+    }
+  },
+  "records": {
+    "batting": [
+      {
+        "title": "Most International Runs",
+        "player": "Sachin Tendulkar (IND)",
+        "stat": "34,357 Runs"
+      },
+      {
+        "title": "Most International Centuries",
+        "player": "Sachin Tendulkar (IND)",
+        "stat": "100 Centuries"
+      },
+      {
+        "title": "Most International Sixes",
+        "player": "Rohit Sharma (IND)",
+        "stat": "620+ Sixes"
+      },
+      {
+        "title": "Highest ODI Individual Score",
+        "player": "Rohit Sharma (IND)",
+        "stat": "264 Runs"
+      },
+      {
+        "title": "Highest Test Individual Score",
+        "player": "Brian Lara (WI)",
+        "stat": "400* Runs"
+      }
+    ],
+    "bowling": [
+      {
+        "title": "Most International Wickets",
+        "player": "Muttiah Muralitharan (SL)",
+        "stat": "1,347 Wickets"
+      },
+      {
+        "title": "Best ODI Bowling Figures",
+        "player": "Chaminda Vaas (SL)",
+        "stat": "8/19"
+      },
+      {
+        "title": "Most 5-Wicket Hauls",
+        "player": "Muttiah Muralitharan (SL)",
+        "stat": "67 Five-Fors"
+      },
+      {
+        "title": "Most Test Wickets",
+        "player": "Muttiah Muralitharan (SL)",
+        "stat": "800 Wickets"
+      }
+    ]
+  }
+}
