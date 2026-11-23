@@ -9,14 +9,15 @@ GMAIL_USER = os.environ["GMAIL_USER"].strip()
 GMAIL_PASS = os.environ["GMAIL_PASS"].replace(" ", "").strip()
 
 FEEDS = [
-    "https://espncricinfo.com",
-    "https://bbci.co.uk",
-    "https://google.com"
+    "https://www." + "://espncricinfo.com",
+    "https://feeds." + "bbci.co.uk/sport/cricket/rss.xml",
+    "https://news." + "://google.com"
 ]
 
 def get_recent_blog_titles():
     try:
-        r = requests.get("https://blogspot.com", timeout=10).json()
+        blog_url = "https://criclivepulse" + "://"
+        r = requests.get(blog_url, timeout=10).json()
         entries = r.get("feed", {}).get("entry", [])
         return [e["title"]["$t"] for e in entries]
     except:
@@ -43,11 +44,12 @@ def write_post(news, past_titles):
     IMPORTANT: Do NOT write about topics already covered in these recent posts:
     {avoid_text}
 
-    Pick a FRESH trending match or cricket update and write a 500-word SEO article in natural HINGLISH.
+    Pick a FRESH upcoming or live match and write a 500-word SEO article in natural HINGLISH.
     Use clean HTML tags (<p>, <h2>, <ul>, <li>, <strong> only; NO <html>, <body>, or backticks).
     First line MUST start with 'TITLE: ' followed by a unique, catchy Hinglish headline.
+    Second line MUST be 'MATCH_INFO: ' followed by the exact Match Date, IST Start Time, and Stadium Venue (e.g., MATCH_INFO: 24 Nov, 07:30 PM IST | Wankhede Stadium, Mumbai).
     Include:
-    1. Fresh Match / News Update in Hinglish
+    1. Match Preview & Exact IST Timing
     2. Stadium Pitch Report & Key Player Stats
     3. Best Fantasy 11 (WK, BAT, ALL, BOWL) & Captain/Vice-Captain Picks
     """
@@ -76,6 +78,9 @@ def write_post(news, past_titles):
     for l in lines:
         if l.startswith("TITLE:"):
             title = l.replace("TITLE:", "").strip()
+        elif l.startswith("MATCH_INFO:"):
+            info = l.replace("MATCH_INFO:", "").strip()
+            body.insert(0, f"<p><strong>⏰ Match Schedule:</strong> {info}</p>")
         else:
             body.append(l)
     return title, "\n".join(body)
