@@ -1,4 +1,4 @@
-import os, time, random, smtplib, feedparser, requests
+import os, time, random, datetime, smtplib, feedparser, requests
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from google import genai
@@ -7,8 +7,6 @@ GEMINI_KEY = os.environ["GEMINI_API_KEY"].strip()
 BLOGGER_EMAIL = os.environ["BLOGGER_EMAIL"].strip()
 GMAIL_USER = os.environ["GMAIL_USER"].strip()
 GMAIL_PASS = os.environ["GMAIL_PASS"].replace(" ", "").strip()
-TG_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
-TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
 
 CRICKET_IMAGES = [
     "https://unsplash.com",
@@ -25,7 +23,7 @@ FEEDS = [
 
 def get_recent_blog_titles():
     try:
-        blog_url = "https://" + ".".join(["criclivepulse", "blogspot", "com"]) + "/feeds/posts/default?alt=json&max-results=5"
+        blog_url = "https://" + ".".join(["criclivepulse", "blogspot", "com"]) + "/feeds/posts/default?alt=json&max-results=6"
         r = requests.get(blog_url, timeout=6).json()
         entries = r.get("feed", {}).get("entry", [])
         return [e["title"]["$t"] for e in entries]
@@ -47,39 +45,42 @@ def get_news():
 def write_post(news, past_titles):
     client = genai.Client(api_key=GEMINI_KEY)
     avoid_text = "\n".join([f"- {t}" for t in past_titles]) if past_titles else "None"
+    today_str = datetime.date.today().strftime("%d %b %Y")
     prompt = f"""
-    You are an expert Indian cricket analyst. Based on these real-time cricket headlines:
+    Today's exact date is {today_str}. You are an expert Indian cricket analyst. Based on these real-time cricket headlines:
     {news}
 
-    IMPORTANT: Do NOT write about topics already covered in these recent posts:
-    {avoid_text}
+    STRICT RULES:
+    1. Do NOT repeat topics from these recent posts:
+       {avoid_text}
+    2. NEVER use past dates (like October) or fake names like 'In-Form Opponents'. Use ONLY real international/IPL teams and dates on or after {today_str}.
 
-    Pick a FRESH upcoming or live match and write a 500-word SEO article in natural HINGLISH.
+    Pick a FRESH upcoming or live match (on or after {today_str}) and write a 500-word SEO article in natural HINGLISH.
     Use clean HTML tags (<p>, <h2>, <ul>, <li>, <strong> only; NO <html>, <body>, or backticks).
-    First line MUST start with 'TITLE: ' followed by a unique, catchy Hinglish headline.
-    Second line MUST be 'MATCH_INFO: ' followed by the exact Match Date, IST Start Time, and Stadium Venue (e.g., MATCH_INFO: 24 Nov, 07:30 PM IST | Wankhede Stadium, Mumbai).
+    First line MUST start with 'TITLE: ' followed by a catchy Hinglish headline with exact team names.
+    Second line MUST be 'MATCH_INFO: ' followed by the exact Match Date (on or after {today_str}), IST Start Time, and Stadium Venue (e.g., MATCH_INFO: 25 Nov, 10:00 AM IST | Shere Bangla National Stadium, Dhaka).
     Include:
     1. Match Preview & Exact IST Timing
     2. Stadium Pitch Report & Key Player Stats
     3. Best Fantasy 11 (WK, BAT, ALL, BOWL) & Captain/Vice-Captain Picks
     """
     
-    models = ["gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-3.5-flash"]
+    models = ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.8-flash"]
     raw = ""
     for m in models:
-        for attempt in range(3):
+        for attempt in range(2):
             try:
                 res = client.models.generate_content(model=m, contents=prompt)
                 if res.text:
                     raw = res.text
                     break
             except Exception as e:
-                time.sleep(5)
+                time.sleep(3)
         if raw:
             break
 
     if not raw:
-        raise Exception("Models busy, skipping empty post.")
+        raise Exception("Gemini API temporarily busy.")
 
     raw = raw.replace("```html", "").replace("```", "").strip()
     lines = raw.split("\n")
@@ -99,7 +100,7 @@ def write_post(news, past_titles):
     if schedule_info:
         header_html += f'<p style="background:#ecfdf5;padding:10px;border-left:4px solid #009270;border-radius:6px"><strong>⏰ Match Schedule:</strong> {schedule_info}</p>'
 
-    return title, header_html + "\n" + "\n".join(body), schedule_info
+    return title, header_html + "\n" + "\n".join(body)
 
 def send_post(title, html):
     msg = MIMEMultipart("alternative")
@@ -111,22 +112,9 @@ def send_post(title, html):
     with smtplib.SMTP_SSL(host, 465) as s:
         s.login(GMAIL_USER, GMAIL_PASS)
         s.sendmail(GMAIL_USER, BLOGGER_EMAIL, msg.as_string())
-    print("Published to Blogger:", title)
-
-def send_telegram(title, schedule_info):
-    if not TG_TOKEN or not TG_CHAT:
-        return
-    try:
-        site_url = "https://" + ".".join(["criclivepulse", "blogspot", "com"])
-        text = f"🏏 *{title}*\n\n⏰ {schedule_info}\n\n📊 Pitch Report & Winning Fantasy 11 yahan dekhein 👇\n{site_url}"
-        tg_url = f"https://telegram.org{TG_TOKEN}/sendMessage"
-        requests.post(tg_url, json={"chat_id": TG_CHAT, "text": text, "parse_mode": "Markdown"}, timeout=8)
-        print("Shared to Telegram!")
-    except Exception as e:
-        print("Telegram skip:", e)
+    print("Published:", title)
 
 if __name__ == "__main__":
     past = get_recent_blog_titles()
-    t, b, sched = write_post(get_news(), past)
+    t, b = write_post(get_news(), past)
     send_post(t, b)
-    send_telegram(t, sched)
