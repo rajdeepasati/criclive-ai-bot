@@ -8,11 +8,12 @@ BLOGGER_EMAIL = os.environ["BLOGGER_EMAIL"].strip()
 GMAIL_USER = os.environ["GMAIL_USER"].strip()
 GMAIL_PASS = os.environ["GMAIL_PASS"].replace(" ", "").strip()
 
+IMG_HOST = "https://" + ".".join(["images", "unsplash", "com"])
 CRICKET_IMAGES = [
-    "https://unsplash.com",
-    "https://unsplash.com",
-    "https://unsplash.com",
-    "https://unsplash.com"
+    IMG_HOST + "/photo-1531415074968-036ba1b575da?w=900&q=80",
+    IMG_HOST + "/photo-1540747913346-19e32dc3e97e?w=900&q=80",
+    IMG_HOST + "/photo-1624526267942-ab0ff8a3e972?w=900&q=80",
+    IMG_HOST + "/photo-1593341646782-e0b495cff86d?w=900&q=80"
 ]
 
 FEEDS = [
@@ -53,12 +54,13 @@ def write_post(news, past_titles):
     STRICT RULES:
     1. Do NOT repeat topics from these recent posts:
        {avoid_text}
-    2. NEVER use past dates (like October) or fake names like 'In-Form Opponents'. Use ONLY real international/IPL teams and dates on or after {today_str}.
+    2. NEVER use past dates (like October) or fake names like 'In-Form Opponents'. Use ONLY real international, women's, domestic, or league teams and dates on or after {today_str}.
 
     Pick a FRESH upcoming or live match (on or after {today_str}) and write a 500-word SEO article in natural HINGLISH.
     Use clean HTML tags (<p>, <h2>, <ul>, <li>, <strong> only; NO <html>, <body>, or backticks).
-    First line MUST start with 'TITLE: ' followed by a catchy Hinglish headline with exact team names.
-    Second line MUST be 'MATCH_INFO: ' followed by the exact Match Date (on or after {today_str}), IST Start Time, and Stadium Venue (e.g., MATCH_INFO: 25 Nov, 10:00 AM IST | Shere Bangla National Stadium, Dhaka).
+    First line MUST start with 'TITLE: ' followed by a catchy Hinglish headline.
+    Second line MUST be 'TEAMS: ' followed by ONLY the exact full names of the two playing teams separated by ' vs ' (e.g., TEAMS: South Africa vs Bangladesh OR TEAMS: India Women vs Australia Women).
+    Third line MUST be 'MATCH_INFO: ' followed by the exact Match Date (on or after {today_str}), IST Start Time, and Stadium Venue (e.g., MATCH_INFO: 25 Nov, 10:00 AM IST | Shere Bangla National Stadium, Dhaka).
     Include:
     1. Match Preview & Exact IST Timing
     2. Stadium Pitch Report & Key Player Stats
@@ -85,11 +87,14 @@ def write_post(news, past_titles):
     raw = raw.replace("```html", "").replace("```", "").strip()
     lines = raw.split("\n")
     title = "Cricket News & Fantasy 11 Analysis"
+    teams_info = ""
     schedule_info = ""
     body = []
     for l in lines:
         if l.startswith("TITLE:"):
             title = l.replace("TITLE:", "").strip()
+        elif l.startswith("TEAMS:"):
+            teams_info = l.replace("TEAMS:", "").strip()
         elif l.startswith("MATCH_INFO:"):
             schedule_info = l.replace("MATCH_INFO:", "").strip()
         else:
@@ -97,8 +102,8 @@ def write_post(news, past_titles):
 
     img_url = random.choice(CRICKET_IMAGES)
     header_html = f'<div style="margin-bottom:14px"><img src="{img_url}" alt="{title}" style="width:100%;border-radius:10px;max-height:360px;object-fit:cover"/></div>'
-    if schedule_info:
-        header_html += f'<p style="background:#ecfdf5;padding:10px;border-left:4px solid #009270;border-radius:6px"><strong>⏰ Match Schedule:</strong> {schedule_info}</p>'
+    if teams_info or schedule_info:
+        header_html += f'<p style="background:#ecfdf5;padding:10px;border-left:4px solid #009270;border-radius:6px"><strong>🏏 Teams:</strong> {teams_info} | <strong>⏰ Match Schedule:</strong> {schedule_info}</p>'
 
     return title, header_html + "\n" + "\n".join(body)
 
