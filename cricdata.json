@@ -2,9 +2,9 @@
   "updated": "28 Nov 2026",
   "series": [
     {
-      "month": "NOVEMBER - DECEMBER 2026",
+      "month": "NOVEMBER - JANUARY 2026-27",
       "name": "The Ashes 2026-27",
-      "dates": "Nov 26 - Jan 07"
+      "dates": "Nov 26 - Jan 08"
     },
     {
       "month": "NOVEMBER - DECEMBER 2026",
@@ -12,24 +12,24 @@
       "dates": "Nov 28 - Dec 19"
     },
     {
-      "month": "NOVEMBER - DECEMBER 2026",
-      "name": "New Zealand tour of England 2026",
-      "dates": "Nov 25 - Dec 15"
-    },
-    {
       "month": "DECEMBER 2026",
-      "name": "Pakistan tour of Sri Lanka 2026",
-      "dates": "Dec 01 - Dec 20"
+      "name": "Pakistan tour of New Zealand 2026",
+      "dates": "Dec 03 - Dec 28"
     },
     {
-      "month": "DECEMBER 2026",
-      "name": "West Indies tour of Bangladesh 2026",
-      "dates": "Dec 05 - Dec 28"
+      "month": "DECEMBER 2026 - JANUARY 2027",
+      "name": "Sri Lanka tour of Australia 2026-27",
+      "dates": "Dec 15 - Jan 10"
     },
     {
-      "month": "NOVEMBER - DECEMBER 2026",
-      "name": "Zimbabwe tour of Ireland 2026",
-      "dates": "Nov 20 - Dec 05"
+      "month": "JANUARY 2027",
+      "name": "West Indies tour of England 2027",
+      "dates": "Jan 12 - Jan 28"
+    },
+    {
+      "month": "JANUARY - FEBRUARY 2027",
+      "name": "Bangladesh tour of Zimbabwe 2027",
+      "dates": "Jan 20 - Feb 15"
     }
   ],
   "wtc": [
@@ -44,42 +44,42 @@
     {
       "rank": 2,
       "team": "India",
-      "m": 14,
-      "w": 9,
+      "m": 13,
+      "w": 8,
       "l": 4,
-      "pct": "66.67%"
+      "pct": "64.10%"
     },
     {
       "rank": 3,
       "team": "South Africa",
-      "m": 8,
-      "w": 5,
+      "m": 10,
+      "w": 6,
       "l": 3,
-      "pct": "62.50%"
+      "pct": "63.33%"
     },
     {
       "rank": 4,
       "team": "New Zealand",
-      "m": 10,
-      "w": 5,
+      "m": 11,
+      "w": 6,
       "l": 4,
-      "pct": "53.33%"
+      "pct": "57.58%"
     },
     {
       "rank": 5,
-      "team": "Sri Lanka",
-      "m": 9,
-      "w": 4,
-      "l": 5,
-      "pct": "44.44%"
+      "team": "England",
+      "m": 15,
+      "w": 8,
+      "l": 6,
+      "pct": "55.56%"
     },
     {
       "rank": 6,
-      "team": "England",
-      "m": 15,
-      "w": 6,
-      "l": 8,
-      "pct": "42.22%"
+      "team": "Sri Lanka",
+      "m": 9,
+      "w": 4,
+      "l": 4,
+      "pct": "48.15%"
     }
   ],
   "players": [
@@ -87,9 +87,9 @@
       "name": "Virat Kohli",
       "team": "IND",
       "role": "Batter",
-      "runs": "27,100+",
+      "runs": "27,300+",
       "avg": "53.2",
-      "sr": "93.5"
+      "sr": "93.4"
     },
     {
       "name": "Rohit Sharma",
@@ -97,77 +97,77 @@
       "role": "Batter",
       "runs": "19,500+",
       "avg": "48.8",
-      "sr": "92.2"
-    },
-    {
-      "name": "Jasprit Bumrah",
-      "team": "IND",
-      "role": "Bowler",
-      "runs": "420+ Wkts",
-      "avg": "20.5",
-      "sr": "4.6 Econ"
+      "sr": "92.1"
     },
     {
       "name": "Joe Root",
       "team": "ENG",
       "role": "Batter",
-      "runs": "19,800+",
-      "avg": "49.5",
-      "sr": "86.4"
+      "runs": "20,100+",
+      "avg": "49.8",
+      "sr": "56.7"
     },
     {
-      "name": "Steven Smith",
+      "name": "Steve Smith",
       "team": "AUS",
       "role": "Batter",
-      "runs": "16,200+",
-      "avg": "54.1",
-      "sr": "80.2"
+      "runs": "16,800+",
+      "avg": "54.5",
+      "sr": "54.2"
     },
     {
-      "name": "Kane Williamson",
-      "team": "NZ",
-      "role": "Batter",
-      "runs": "18,100+",
-      "avg": "52.8",
-      "sr": "82.0"
+      "name": "Jasprit Bumrah",
+      "team": "IND",
+      "role": "Bowler",
+      "runs": "450+ Wkts",
+      "avg": "19.8",
+      "sr": "4.4 Econ"
+    },
+    {
+      "name": "Pat Cummins",
+      "team": "AUS",
+      "role": "Bowler",
+      "runs": "520+ Wkts",
+      "avg": "22.4",
+      "sr": "4.7 Econ"
     }
   ],
   "schedule": [
     {
       "series": "The Ashes 2026-27",
-      "match": "Australia vs England",
-      "date": "28 Nov 2026, 05:30 AM IST",
+      "match": "Australia vs England, 1st Test",
+      "date": "26 Nov 2026, 05:30 AM IST",
       "venue": "Perth Stadium, Perth"
     },
     {
       "series": "India tour of South Africa 2026",
-      "match": "South Africa vs India",
+      "match": "South Africa vs India, 1st ODI",
       "date": "28 Nov 2026, 01:30 PM IST",
       "venue": "SuperSport Park, Centurion"
     },
     {
-      "series": "New Zealand tour of England 2026",
-      "match": "England vs New Zealand",
-      "date": "29 Nov 2026, 03:30 PM IST",
-      "venue": "Lord's, London"
-    },
-    {
-      "series": "Pakistan tour of Sri Lanka 2026",
-      "match": "Sri Lanka vs Pakistan",
-      "date": "01 Dec 2026, 09:30 AM IST",
-      "venue": "R. Premadasa Stadium, Colombo"
+      "series": "India tour of South Africa 2026",
+      "match": "South Africa vs India, 2nd ODI",
+      "date": "01 Dec 2026, 01:30 PM IST",
+      "venue": "Wanderers Stadium, Johannesburg"
     },
     {
       "series": "The Ashes 2026-27",
-      "match": "Australia vs England",
+      "match": "Australia vs England, 2nd Test",
       "date": "04 Dec 2026, 09:30 AM IST",
       "venue": "Adelaide Oval, Adelaide"
     },
     {
-      "series": "West Indies tour of Bangladesh 2026",
-      "match": "Bangladesh vs West Indies",
-      "date": "05 Dec 2026, 09:00 AM IST",
-      "venue": "Sher-e-Bangla National Cricket Stadium, Dhaka"
+      "series": "Pakistan tour of New Zealand 2026",
+      "match": "New Zealand vs Pakistan, 1st T20I",
+      "date": "05 Dec 2026, 11:30 AM IST",
+      "venue": "Eden Park, Auckland"
+    },
+    {
+      "series": "The Ashes 2026-27",
+      "match": "Australia vs England, 3rd Test",
+      "date": "17 Dec 2026, 05:30 AM IST",
+      "venue": "The Gabba, Brisbane"
     }
   ],
   "rankings": {
@@ -187,27 +187,27 @@
         },
         {
           "rank": 3,
-          "name": "Steven Smith",
-          "team": "AUS",
-          "pts": 828
+          "name": "Yashasvi Jaiswal",
+          "team": "IND",
+          "pts": 832
         },
         {
           "rank": 4,
-          "name": "Yashasvi Jaiswal",
-          "team": "IND",
-          "pts": 792
+          "name": "Steve Smith",
+          "team": "AUS",
+          "pts": 818
         },
         {
           "rank": 5,
-          "name": "Daryl Mitchell",
-          "team": "NZ",
-          "pts": 780
+          "name": "Harry Brook",
+          "team": "ENG",
+          "pts": 805
         },
         {
           "rank": 6,
-          "name": "Harry Brook",
-          "team": "ENG",
-          "pts": 775
+          "name": "Virat Kohli",
+          "team": "IND",
+          "pts": 790
         }
       ],
       "odi": [
@@ -231,21 +231,21 @@
         },
         {
           "rank": 4,
-          "name": "Virat Kohli",
-          "team": "IND",
-          "pts": 748
+          "name": "Harry Tector",
+          "team": "IRE",
+          "pts": 736
         },
         {
           "rank": 5,
-          "name": "Harry Tector",
-          "team": "IRE",
+          "name": "Daryl Mitchell",
+          "team": "NZ",
           "pts": 720
         },
         {
           "rank": 6,
-          "name": "Daryl Mitchell",
-          "team": "NZ",
-          "pts": 712
+          "name": "Virat Kohli",
+          "team": "IND",
+          "pts": 715
         }
       ],
       "t20": [
@@ -275,15 +275,15 @@
         },
         {
           "rank": 5,
-          "name": "Babar Azam",
+          "name": "Mohammad Rizwan",
           "team": "PAK",
-          "pts": 750
+          "pts": 740
         },
         {
           "rank": 6,
-          "name": "Mohammad Rizwan",
-          "team": "PAK",
-          "pts": 735
+          "name": "Jos Buttler",
+          "team": "ENG",
+          "pts": 725
         }
       ]
     },
@@ -297,7 +297,7 @@
         },
         {
           "rank": 2,
-          "name": "Nat Sciver-Brunt",
+          "name": "Natalie Sciver-Brunt",
           "team": "ENG",
           "pts": 760
         },
@@ -309,19 +309,19 @@
         },
         {
           "rank": 4,
-          "name": "Chamari Athapaththu",
-          "team": "SL",
-          "pts": 725
+          "name": "Beth Mooney",
+          "team": "AUS",
+          "pts": 735
         },
         {
           "rank": 5,
-          "name": "Ellyse Perry",
-          "team": "AUS",
-          "pts": 710
+          "name": "Chamari Athapaththu",
+          "team": "SL",
+          "pts": 712
         },
         {
           "rank": 6,
-          "name": "Beth Mooney",
+          "name": "Ellyse Perry",
           "team": "AUS",
           "pts": 695
         }
@@ -337,19 +337,19 @@
           "rank": 2,
           "name": "Tahlia McGrath",
           "team": "AUS",
-          "pts": 748
+          "pts": 745
         },
         {
           "rank": 3,
           "name": "Hayley Matthews",
           "team": "WI",
-          "pts": 732
+          "pts": 738
         },
         {
           "rank": 4,
           "name": "Smriti Mandhana",
           "team": "IND",
-          "pts": 725
+          "pts": 722
         },
         {
           "rank": 5,
@@ -361,7 +361,7 @@
           "rank": 6,
           "name": "Suzie Bates",
           "team": "NZ",
-          "pts": 690
+          "pts": 688
         }
       ]
     }
